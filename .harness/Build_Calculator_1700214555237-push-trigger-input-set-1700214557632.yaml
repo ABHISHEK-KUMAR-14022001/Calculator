@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Calculator_1700214555237-push-trigger-input-set
+  identifier: Build_Calculator_1700214555237pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: calculator
+  pipeline:
+    identifier: Build_Calculator_1700214555237
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
