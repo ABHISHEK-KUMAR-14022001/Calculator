@@ -18,34 +18,20 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: npminstall
-                  name: npm_install
-                  spec:
-                    command: npm install
-                  timeout: ""
                   type: Run
-              - step:
-                  identifier: npmtest
-                  name: npm_test
+                  name: dockerfile
+                  identifier: dockerfile
                   spec:
-                    command: npm run test
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
-                  spec:
-                    image: plugins/docker
-                    settings:
-                      dry_run: "true"
-                      repo: hello/world
-                      tags: latest
-                  timeout: ""
-                  type: Plugin
+                    connectorRef: dockerregistry
+                    image: cal
+                    shell: Sh
+                    command: |-
+                      docker build -t cal .
+                      docker run -d -p 3000:3000 --name calculator cal
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
+            type: Docker
             spec: {}
-            type: Cloud
         type: CI
